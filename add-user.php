@@ -1,10 +1,20 @@
+<?php
+session_start();
+include 'engine.php';
+
+?>
 <!DOCTYPE html>
 
 <html lang="en" >
    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
         <meta charset="utf-8"/>
-        
+    
+
+
+        <script src="jquery.min.js"></script>
+        <script src="main.js"></script>
+
         <title>COP Nsema Assemblies | Add User</title>
         <meta name="description" content="Add user example"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,6 +31,7 @@
         </script>
         <!--end::Fonts -->
 
+       
         
                     
             <!--begin::Page Custom Styles(used by this page) --> 
@@ -841,7 +852,7 @@
                 </div>
             </a>
             <a class="kt-wizard-v4__nav-item nav-item" href="#" data-ktwizard-type="step">
-                <div class="kt-wizard-v4__nav-body">
+                <div  id="show" class="kt-wizard-v4__nav-body">
                     <div class="kt-wizard-v4__nav-number">
                         4
                     </div>
@@ -865,7 +876,7 @@
             <div class="kt-grid">
                 <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v4__wrapper">
                     <!--begin: Form Wizard Form-->
-                    <form class="kt-form" id="kt_apps_user_add_user_form">
+                    <form class="kt-form" id="kt_apps_user_add_user_form" method="post">
                         <!--begin: Form Wizard Step 1-->
                         <div class="kt-wizard-v4__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
                             <div class="kt-heading kt-heading--md">User's Profile Details:</div>
@@ -892,19 +903,19 @@
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <input class="form-control" type="text" value="" required> *
+                                                        <input class="form-control" type="text" value=""  name="fname" > *
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <input class="form-control" type="text" value="" required>*
+                                                        <input class="form-control" type="text" value="" name="lname" >*
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Other Names</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <input class="form-control" type="text" value="">
+                                                        <input class="form-control" type="text" value="" name="oname">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -941,7 +952,7 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                                            <input type="text" class="form-control" value="" placeholder="Phone" aria-describedby="basic-addon1" name="contact" required>
+                                                            <input type="text" class="form-control" value="" placeholder="Phone" aria-describedby="basic-addon1" name="contact"  >
                                                         </div>
                                                         <span class="form-text text-muted">We'll never share your email with anyone else.</span>
                                                     </div>
@@ -951,7 +962,7 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                                            <input type="text" class="form-control" value="" placeholder="Phone" aria-describedby="basic-addon1">
+                                                            <input type="text" class="form-control" name="ocontact" value="" placeholder="Phone" aria-describedby="basic-addon1">
                                                         </div>
                                                         <span class="form-text text-muted">We'll never share your email with anyone else.</span>
                                                     </div>
@@ -961,11 +972,11 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                                            <input type="text" class="form-control" value="" >
+                                                            <input type="text" class="form-control" value="" name="email">
                                                         </div>
                                                     </div>    
                                                 </div>
-                                                <div class="form-group row">
+                                                <!-- <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">COPrID</label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
@@ -974,83 +985,80 @@
                                                         </div> 
                                                     </div>
                                                     
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Assembly</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control">
+                                                            <select name="assembly" class="form-control">
                                                                 <option>Select assembly...</option>
-                                                                <option value="id">Emmanuel (English)</option>
-                                                                <option value="msa">Glory (Twi)</option>
-                                                                <option value="msa">Hope (Twi)</option>
+                                                                <option value="Emmanuel (English)">Emmanuel (English)</option>
+                                                                <option value="Glory (Twi)">Glory (Twi)</option>
+                                                                <option value="Hope (Twi)">Hope (Twi)</option>
                                                                 </select>
                                                         </div> 
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Ministry</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <select class="form-control">
+                                                        <select name="ministry" class="form-control">
                                                             <option>Select ministry...</option>
-                                                            <option value="id">Children</option>
-                                                            <option value="msa">Women</option>
-                                                            <option value="msa">PEMEM</option>
-                                                            <option value="id">Youth</option>
+                                                            <option value="Children">Children</option>
+                                                            <option value="Women">Women</option>
+                                                            <option value="PEMEM">PEMEM</option>
+                                                            <option value="Youth">Youth</option>
                                                             </select>
                                                     </div> 
                                                 </div>
 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Group</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <select class="form-control">
+                                                        <select name="group" class="form-control">
                                                             <option>Please select group</option>
-                                                            <option value="id">Children</option>
-                                                            <option value="msa">Women</option>
-                                                            <option value="msa">PEMEM</option>
-                                                            <option value="id">Youth</option>
+                                                            <option value="Children">Children</option>
+                                                            <option value="Women">Women</option>
+                                                            <option value="PEMEM">PEMEM</option>
+                                                            <option value="Youth">Youth</option>
                                                             </select>
                                                     </div> 
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Baptism</label>
                                                    <div class="col-lg-9 col-xl-9">
-                                                        <select class="form-control">
+                                                        <select name="baptism" class="form-control">
                                                             <option>Please select group</option>
-                                                            <option value="id">Yes</option>
-                                                            <option value="id">No</option>
+                                                            <option value="Yes">Yes</option>
+                                                            <option value="No">No</option>
                                                     </div> 
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Date of baptism</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <input class="form-control" type="date" value="">
+                                                        <input name="dobaptism" class="form-control" type="date" value="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Residence</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <input class="form-control" type="text" value="">
+                                                        <input name="residence" class="form-control" type="text" value="">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <!-- <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Occupation</label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <input class="form-control" type="text" value="">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group form-group-last row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Ghana Card ID</label>
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" placeholder="" value="" name="ghcard">
+                                                            <input type="text" class="form-control" placeholder="" value="" name="ghid">
                                                             <div class="input-group-append"><span class="input-group-text"></span></div>
                                                         </div>
                                                     </div>
                                                 </div>
                  </button>
-                                                <div class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
-                                                    Previous<!--send to previous page-->
-                                                </div>
-
+                              
 
 
 
@@ -1059,9 +1067,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-brand btn-bold">
                                                 
-                        Submit 
+                       
                         </div>
 
                         <!--end: Form Wizard Step 1-->
@@ -1084,7 +1091,7 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                                            <input type="text" class="form-control" value="" placeholder="Email" aria-describedby="basic-addon1">
+                                                            <input type="text" class="form-control" value="" placeholder="Email" aria-describedby="basic-addon1" name="uname">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1093,7 +1100,7 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"></div>
-                                                            <input type="password" class="form-control" value="" placeholder="" aria-describedby="basic-addon1">
+                                                            <input type="password" class="form-control" value="" placeholder="" name="pass" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1102,7 +1109,7 @@
                                                     <div class="col-lg-9 col-xl-9">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend"></div>
-                                                            <input type="password" class="form-control" value="" placeholder="" aria-describedby="basic-addon1">
+                                                            <input type="password" class="form-control" value="" placeholder=""  name="cpass" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1110,7 +1117,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Time Zone</label>
                                                     <div class="col-lg-9 col-xl-9">
-                                                        <select class="form-control">
+                                                        <select name="tzone" class="form-control">
                                                             <option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
                                                             <option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
                                                             <option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
@@ -1257,7 +1264,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group form-group-last row">
+                                                <!-- <div class="form-group form-group-last row">
                                                     <label class="col-xl-3 col-lg-3 col-form-label">Bio data</label>
                                                     <div class="col-lg-9 col-xl-6">
                                                         <div class="kt-checkbox-inline">
@@ -1275,7 +1282,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                                 <div class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
 
@@ -1290,33 +1297,31 @@
                                                     <div class="col-lg-9 col-xl-6">
                                                         <div class="kt-checkbox-single">
                                                             <label class="kt-checkbox">
-                                                                <input type="checkbox"> Allow user to reset password
+                                                                <input name="all_pass" value="check_pass_allowed" type="checkbox"> Allow user to reset password
                                                                 <span></span>
                                                             </label>
                                                         </div>
                                                         <span class="form-text text-muted">
 															For extra security, this requires the user to confirm email or phone number when user resets password.
-															<a href="#" class="kt-link">Learn more</a>.
+															<a href="#" class="kt_link">Learn more</a>.
 														</span>
                                                     </div>
                                                      <div class="col-lg-9 col-xl-6">
                                                         <div class="kt-checkbox-single">
                                                             <label class="kt-checkbox">
-                                                                <input type="checkbox"> Allow user to access dashboard
+                                                                <input id="alld" name="all_dash" value="check_dash_allowed" type="checkbox"> Allow user to access dashboard
                                                                 <span></span>
                                                             </label>
                                                         </div>
                                                         <span class="form-text text-muted">
                                                           
-                                                            <a href="#" class="kt-link"></a>.
+                                                            <a href="#" class="kt_link"></a>.
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row kt-margin-t-10 kt-margin-b-10">
                                                     <label class="col-xl-3 col-lg-3 col-form-label"></label>
-                                                    <div class="col-lg-9 col-xl-6">
-                                                        <button type="button" class="btn btn-label-danger btn-bold btn-sm kt-margin-t-5 kt-margin-b-5">Deactivate account ?</button>
-                                                    </div>
+                                                  
                                                 </div>
 
                                             </div>
@@ -1362,7 +1367,7 @@
 										<div class="col-xl-6">
 											<div class="form-group">
 												<label>Region</label>
-												<input type="text" class="form-control" name="state" placeholder="State" value="">
+												<input type="text" class="form-control" name="region" placeholder="State" value="">
 											
 											</div>
 										</div>
@@ -1629,14 +1634,14 @@
 										<div class="col-xl-6">
 											<div class="form-group">
 												<label>Mother's Name</label>
-												<input type="text" class="form-control" name="postcode" placeholder="" value="">
+												<input type="text" class="form-control" name="mname" placeholder="" value="">
 											
 											</div>
 										</div>
 										<div class="col-xl-6">
 											<div class="form-group">
 												<label>Mother's Contact</label>
-												<input type="text" class="form-control" name="state" placeholder="" value="">
+												<input type="text" class="form-control" name="mcontact" placeholder="" value="">
 											
 											</div>
 										</div>
@@ -1645,14 +1650,14 @@
 										<div class="col-xl-6">
 											<div class="form-group">
 												<label>Mother's Address</label>
-												<input type="text" class="form-control" name="postcode" placeholder="Postcode" value="">
+												<input type="text" class="form-control" name="maddress" placeholder="Postcode" value="">
 											
 											</div>
 										</div>
 										<div class="col-xl-6">
 											<div class="form-group">
 												<label>Mother's Status</label>
-                                                <select name="country" class="form-control">
+                                                <select name="mstat" class="form-control">
                                                  <option>Please select</option>
                                                  <option> Alive</option>
                                                  <option> Dead</option>
@@ -1666,14 +1671,14 @@
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Father's Name</label>
-                                                    <input type="text" class="form-control" name="postcode" placeholder="" value="">
+                                                    <input type="text" class="form-control" name="fatname" placeholder="" value="">
                                                 
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Father's Contact</label>
-                                                    <input type="text" class="form-control" name="state" placeholder="" value="">
+                                                    <input type="text" class="form-control" name="fcont" placeholder="" value="">
                                                 
                                                 </div>
                                             </div>
@@ -1682,14 +1687,14 @@
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Father's Address</label>
-                                                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="">
+                                                    <input type="text" class="form-control" name="faddress" placeholder="Postcode" value="">
                                                 
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label>Father's Status</label>
-                                                    <select name="country" class="form-control">
+                                                    <select name="fstat" class="form-control">
                                                      <option>Please select</option>
                                                      <option> Alive</option>
                                                      <option> Dead</option>
@@ -1703,14 +1708,14 @@
                                                 <div class="col-xl-6">
                                                     <div class="form-group">
                                                         <label>Next-of-kin</label>
-                                                        <input type="text" class="form-control" name="postcode" placeholder="" value="">
+                                                        <input type="text" class="form-control" name="nok" placeholder="" value="">
                                                     
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6">
                                                     <div class="form-group">
                                                         <label>N-O-K Contact</label>
-                                                        <input type="text" class="form-control" name="state" placeholder="" value="">
+                                                        <input type="text" class="form-control" name="nokcont" placeholder="" value="">
                                                     
                                                     </div>
                                                 </div>
@@ -1719,14 +1724,14 @@
                                                 <div class="col-xl-6">
                                                     <div class="form-group">
                                                         <label>N-O-K Address</label>
-                                                        <input type="text" class="form-control" name="postcode" placeholder="Postcode" value="">
+                                                        <input type="text" class="form-control" name="nokaddress" placeholder="Postcode" value="">
                                                     
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6">
                                                     <div class="form-group">
                                                         <label>Marital Stauts</label>
-                                                        <select name="country" class="form-control">
+                                                        <select name="maritstat" class="form-control">
                                                          <option>Please select</option>
                                                          <option> Married</option>
                                                          <option> Single</option>
@@ -1747,68 +1752,17 @@
                         <!--end: Form Wizard Step 3-->
 
                         <!--begin: Form Wizard Step 4-->
-                        <div class="kt-wizard-v4__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Review your Details and Submit</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                <div class="kt-wizard-v4__review">
-                                    <div class="kt-wizard-v4__review-item">
-                                        <div class="kt-wizard-v4__review-title">
-                                            <!--Member's full name and COPrID here--> 
-                                        </div>
-                                        <div class="kt-wizard-v4__review-content">
-                                            <!--put first, last and other names of user here-->Unknown<!--full name of the member here--> 
-                                            <br/> Phone: XXXX XXX XXX XXX<!--phone number of the member here-->
-                                            <br/> Email: XXXX XXX XXX XXX<!--email address here-->
-                                        </div>
-                                    </div>
-                                    <div class="kt-wizard-v4__review-item">
-                                        <div class="kt-wizard-v4__review-title">
-                                            Your Address Details
-                                        </div>
-                                        <div class="kt-wizard-v4__review-content">
-                                            Address Line 1: XXXX XXX XXX XXX<!--reference to the address line 1 saved-->
-                                            <br/> Address Line 2:XXXX XXX XXX XXX<!--reference to the address line 2 saved-->
-                                            <br/> Region:XXXX XXX XXX XXX <!--reference to the region saved-->
-                                            <br/> Country:XXXX XXX XXX XXX <!--reference to the country saved-->
-                                        </div>
-                                    </div>
-                                    <div class="kt-wizard-v4__review-item">
-                                        <div class="kt-wizard-v4__review-title">
-                                            Chosen Assembly
-                                        </div>
-                                        <div class="kt-wizard-v4__review-content">
-                                         
-                                          <!--print a short receipt notice for member-->
-                                            <br/> Assembly: XXXX XXX XXX XXX <!--reference to the asssembly-->
-                                            <br/> Ministry: XXXX XXX XXX XXX <!--reference to the ministry selected by the member alone-->
-                                            <br/>Group: XXXX XXX XXX XXX<!--reference the group of the member-->
-                                           
-                                        </div>
-                                    </div>
+                        
+                        <div id="showwiz" class='kt-wizard-v4__content' data-ktwizard-type='step-content'>
 
-                                    <div class="kt-wizard-v4__review-item">
-                                        <div class="kt-wizard-v4__review-title">
-                                            Your Login Credentials<!--this fields are autogenerated -->
-                                        </div>
-                                        <div class="kt-wizard-v4__review-content">
-                                            Username: xxxx xxxx xxxx <!--generate username here-->
-                                            <br/> Password: XXXX XXX XXX XXX <!--generate password here-->
-                                            <br /> Member url:
-                                            <br/> QR Code: <!--generate qr code here-->
-                                           
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        
                         </div>
                         <!--end: Form Wizard Step 4-->
 
                         <!--begin: Form Actions -->
                         <div class="kt-form__actions">
-                            <div class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
-                                Previous<!--send to previous page-->
-                            </div>
-                            <div class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
+                          
+                            <div id="subform" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold" >
                                 Submit<!--submit shows the word printout:- member registration detail.docx -->
                             </div>
                            

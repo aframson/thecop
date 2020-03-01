@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'engine.php';
+?>
 <!DOCTYPE html>
 <html lang="en" >
     
@@ -9,8 +13,12 @@
         <meta name="description" content="Latest updates and statistic charts"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <script src="jquery.min.js"></script>
+        <script src="main.js"></script>
+
       
         <script src="../../../../ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+
         <script>
             WebFont.load({
                 google: {"families":["Poppins:300,400,500,600,700"]},
@@ -116,7 +124,15 @@
 	<!--begin: Quick panel -->
 	<div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Quick panel" data-placement="left">
 		<div class="kt-header__topbar-wrapper">
-			
+			<span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+				<!--<i class="flaticon2-cube-1"></i>-->
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--danger">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="bound" x="0" y="0" width="24" height="24"/>
+        <rect id="Rectangle-7" fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
+        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" id="Combined-Shape" fill="#000000" opacity="0.3"/>
+    </g>
+</svg>			</span>
 		</div>
 	</div>
 	
@@ -125,7 +141,7 @@
 	<div class="kt-header__topbar-item kt-header__topbar-item--user">
 		<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px" aria-expanded="false">
 			<span class="kt-header__topbar-welcome">Hi,</span>
-			<span class="kt-header__topbar-username"><!--put the name of the user here-->Sean</span>
+			<span class="kt-header__topbar-username"><!--put the name of the user here--><?php echo GetUserInfo('fname')?></span>
 			<!--put the picture of the user here--><img class="" alt="Pic" src="assets/media/users/300_21.jpg">
 
 			<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
@@ -140,7 +156,7 @@
            
         </div>
         <div class="kt-user-card__name">
-           <!--the name of the user should be shown here--> Sean Stone
+           <!--the name of the user should be shown here--> <?php echo GetUserInfo('fname').' '.GetUserInfo('lname') ?>
         </div>
         <div class="kt-user-card__badge">
             <span class="btn btn-success btn-sm btn-bold btn-font-md"><!--the number of messages of the user here-->23 messages</span>
@@ -153,7 +169,7 @@
 
 
 <div class="kt-notification">
-    <a href="custom/apps/user/profile-1/overview.html" class="kt-notification__item">
+    <a href="custom/apps/user/profile-1/member-overview.html" class="kt-notification__item">
         <div class="kt-notification__item-icon">
             <i class="flaticon2-calendar-3 kt-font-success"></i>
         </div>
@@ -164,7 +180,7 @@
           
         </div>
     </a>
-    <a href="messages.html" class="kt-notification__item">
+    <a href="member-messages.html" class="kt-notification__item">
         <div class="kt-notification__item-icon">
             <i class="flaticon2-mail kt-font-warning"></i>
         </div>
@@ -213,11 +229,11 @@
     <div class="kt-subheader__main">
                     <button class="kt-subheader__mobile-toggle" id="kt_subheader_mobile_toggle"><span></span></button>
         
-        <h3 class="kt-subheader__title">My Profile</h3>
+        <h3 class="kt-subheader__title">Profile 1</h3>
         
         <span class="kt-subheader__separator kt-subheader__separator--v"></span>
         
-        <span class="kt-subheader__desc">#COPKADNA-45681</span>
+        <span class="kt-subheader__desc"><?php echo GetUserInfo('cop')?></span>
         
       
     </div>
@@ -299,33 +315,30 @@
                 <div class="kt-widget__content">
                     <div class="kt-widget__section">
                         <a href="#" class="kt-widget__username">
-                            Jason Muller    
+                            <?php echo GetUserInfo('fname').' '.GetUserInfo('lname') ?> 
                             <i class="flaticon2-correct kt-font-success"></i>                       
                         </a>
                         <span class="kt-widget__subtitle">
-                            Head of Development               
+                           <?php echo GetUserInfo('Occupation') ?>              
                         </span>
                     </div>
 
-                    <div class="kt-widget__action">
-                        <button type="button" class="btn btn-info btn-sm">chat</button>&nbsp;
-                        <button type="button" class="btn btn-success btn-sm">follow</button>                         
-                    </div>
+                   
                 </div>
             </div>
             <div class="kt-widget__body">
                 <div class="kt-widget__content">
                     <div class="kt-widget__info">
                         <span class="kt-widget__label">Email:</span>
-                        <a href="#" class="kt-widget__data">matt@fifestudios.com</a>
+                        <a href="#" class="kt-widget__data"><?php echo GetUserInfo('email') ?></a>
                     </div>
                     <div class="kt-widget__info">
                         <span class="kt-widget__label">Phone:</span>
-                        <a href="#" class="kt-widget__data">44(76)34254578</a>
+                        <a href="#" class="kt-widget__data"><?php echo GetUserInfo('contactphone') ?></a>
                     </div>
                     <div class="kt-widget__info">
-                        <span class="kt-widget__label">Location:</span>
-                        <span class="kt-widget__data">Melbourne</span>
+                        <span class="kt-widget__label">Residence:</span>
+                        <span class="kt-widget__data"><?php echo GetUserInfo('residence') ?></span>
                     </div>
                 </div>
                 <div class="kt-widget__items">
@@ -359,7 +372,7 @@
                             </span>
                         </span>    
                     </a>
-                    <a href="member-account-information.html" class="kt-widget__item ">
+                    <a href="member-account-information.html" class="kt-widget__item kt-widget__item--active">
                         <span class="kt-widget__section">
                             <span class="kt-widget__icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -374,7 +387,7 @@
                             </span>
                         </spandiv>    
                     </a>
-                    <a href="member-change-password.html" class="kt-widget__item kt-widget__item--active">
+                    <a href="member-change-password.php?id=<?php echo $_SESSION['id'];?>" class="kt-widget__item ">
                         <span class="kt-widget__section">
                             <span class="kt-widget__icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -386,10 +399,11 @@
     </g>
 </svg>                            </span>
                             <span  class="kt-widget__desc">
-                                Change Password                                                       
+                                Change Password Credentials                                                      
                             </span>
                         </span> 
                         <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">5</span>                                         
+                    </a>
                 </div>
             </div>
         </div>
@@ -400,55 +414,55 @@
 
      </div>
     <!--End:: App Aside-->
-    
+
     <!--Begin:: App Content-->
     <div class="kt-grid__item kt-grid__item--fluid kt-app__content">
         <div class="row">
             <div class="col-xl-12">
-                <div class="kt-portlet kt-portlet--height-fluid">
+                <div class="kt-portlet">
                     <div class="kt-portlet__head">
                         <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title">Change Password<small>change or reset your account password</small></h3>
+                            <h3 class="kt-portlet__head-title">Account Information <small>change your account settings</small></h3>
                         </div>
-                        <div class="kt-portlet__head-toolbar kt-hidden">
-                            <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-wrapper">
                                 <div class="dropdown dropdown-inline">
-                                    <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="la la-sellsy"></i>
+                                    <button type="button" class="btn btn-label-brand btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="flaticon2-console"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <ul class="kt-nav">
                                             <li class="kt-nav__section kt-nav__section--first">
-                                                <span class="kt-nav__section-text">Quick Actions</span>
+                                                <span class="kt-nav__section-text">Export Tools</span>
                                             </li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon flaticon2-graph-1"></i>
-                                                    <span class="kt-nav__link-text">Statistics</span>
+                                                    <i class="kt-nav__link-icon la la-print"></i>
+                                                    <span class="kt-nav__link-text">Print</span>
                                                 </a>
                                             </li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
-                                                    <span class="kt-nav__link-text">Events</span>
+                                                    <i class="kt-nav__link-icon la la-copy"></i>
+                                                    <span class="kt-nav__link-text">Copy</span>
                                                 </a>
                                             </li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon flaticon2-layers-1"></i>
-                                                    <span class="kt-nav__link-text">Reports</span>
+                                                    <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                                    <span class="kt-nav__link-text">Excel</span>
                                                 </a>
                                             </li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon flaticon2-bell-1o"></i>
-                                                    <span class="kt-nav__link-text">Notifications</span>
+                                                    <i class="kt-nav__link-icon la la-file-text-o"></i>
+                                                    <span class="kt-nav__link-text">CSV</span>
                                                 </a>
                                             </li>
                                             <li class="kt-nav__item">
                                                 <a href="#" class="kt-nav__link">
-                                                    <i class="kt-nav__link-icon flaticon2-file-1"></i>
-                                                    <span class="kt-nav__link-text">Files</span>
+                                                    <i class="kt-nav__link-icon la la-file-pdf-o"></i>
+                                                    <span class="kt-nav__link-text">PDF</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -457,43 +471,274 @@
                             </div>
                         </div>
                     </div>
-                    <form class="kt-form kt-form--label-right">
+                    <form id="fsub" class="kt-form kt-form--label-right">
                         <div class="kt-portlet__body">
                             <div class="kt-section kt-section--first">
                                 <div class="kt-section__body">
-                                    <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
-                                        <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
-                                        <div class="alert-text">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire, <br>or they might inadvertently get locked out of the system!</div>
-                                        <div class="alert-close">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true"><i class="la la-close"></i></span>
-                                            </button>
-                                        </div>
-                                    </div>
-
                                     <div class="row">
                                         <label class="col-xl-3"></label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <h3 class="kt-section__title kt-section__title-sm">Change Or Recover Your Password:</h3>
+                                            <h3 class="kt-section__title kt-section__title-sm">Account:</h3>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Accounts Number</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <input type="password" class="form-control" value="" placeholder="Current password">
-                                            <a href="#" class="kt-link kt-font-sm kt-font-bold kt-margin-t-5">Forgot password ?</a>
+                                            <div class="kt-spinner kt-spinner--sm kt-spinner--success kt-spinner--right kt-spinner--input">
+                                                <input name="accnum" class="form-control"  type="text" value="">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <input type="password" class="form-control" value="" placeholder="New password">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
+                                                <input name="email" type="text" class="form-control" value="" placeholder="" aria-describedby="basic-addon1">
+                                            </div>
+                                            <span class="form-text text-muted">Email will not be publicly displayed. <a href="#" class="kt-link">Learn more</a>.</span>
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-last row">
-                                        <label class="col-xl-3 col-lg-3 col-form-label">Verify Password</label>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Language</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <input type="password" class="form-control" value="" placeholder="Verify password">
+                                            <select name="language" class="form-control">
+                                                <option>Select Language...</option>
+                                                <option value="id">Bahasa Indonesia - Indonesian</option>
+                                                <option value="msa">Bahasa Melayu - Malay</option>
+                                                <option value="ca">Català - Catalan</option>
+                                                <option value="cs">Čeština - Czech</option>
+                                                <option value="da">Dansk - Danish</option>
+                                                <option value="de">Deutsch - German</option>
+                                                <option value="en" selected="">English</option>
+                                                <option value="en-gb">English UK - British English</option>
+                                                <option value="es">Español - Spanish</option>
+                                                <option value="eu">Euskara - Basque (beta)</option>
+                                                <option value="fil">Filipino</option>
+                                                <option value="fr">Français - French</option>
+                                                <option value="ga">Gaeilge - Irish (beta)</option>
+                                                <option value="gl">Galego - Galician (beta)</option>
+                                                <option value="hr">Hrvatski - Croatian</option>
+                                                <option value="it">Italiano - Italian</option>
+                                                <option value="hu">Magyar - Hungarian</option>
+                                                <option value="nl">Nederlands - Dutch</option>
+                                                <option value="no">Norsk - Norwegian</option>
+                                                <option value="pl">Polski - Polish</option>
+                                                <option value="pt">Português - Portuguese</option>
+                                                <option value="ro">Română - Romanian</option>
+                                                <option value="sk">Slovenčina - Slovak</option>
+                                                <option value="fi">Suomi - Finnish</option>
+                                                <option value="sv">Svenska - Swedish</option>
+                                                <option value="vi">Tiếng Việt - Vietnamese</option>
+                                                <option value="tr">Türkçe - Turkish</option>
+                                                <option value="el">Ελληνικά - Greek</option>
+                                                <option value="bg">Български език - Bulgarian</option>
+                                                <option value="ru">Русский - Russian</option>
+                                                <option value="sr">Српски - Serbian</option>
+                                                <option value="uk">Українська мова - Ukrainian</option>
+                                                <option value="he">עִבְרִית - Hebrew</option>
+                                                <option value="ur">اردو - Urdu (beta)</option>
+                                                <option value="ar">العربية - Arabic</option>
+                                                <option value="fa">فارسی - Persian</option>
+                                                <option value="mr">मराठी - Marathi</option>
+                                                <option value="hi">हिन्दी - Hindi</option>
+                                                <option value="bn">বাংলা - Bangla</option>
+                                                <option value="gu">ગુજરાતી - Gujarati</option>
+                                                <option value="ta">தமிழ் - Tamil</option>
+                                                <option value="kn">ಕನ್ನಡ - Kannada</option>
+                                                <option value="th">ภาษาไทย - Thai</option>
+                                                <option value="ko">한국어 - Korean</option>
+                                                <option value="ja">日本語 - Japanese</option>
+                                                <option value="zh-cn">简体中文 - Simplified Chinese</option>
+                                                <option value="zh-tw">繁體中文 - Traditional Chinese</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Time Zone</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <select name="timezone" class="form-control">
+                                                <option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
+                                                <option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
+                                                <option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
+                                                <option data-offset="-36000" value="Hawaii">(GMT-10:00) Hawaii</option>
+                                                <option data-offset="-28800" value="Alaska">(GMT-08:00) Alaska</option>
+                                                <option data-offset="-25200" value="Pacific Time (US &amp; Canada)">(GMT-07:00) Pacific Time (US &amp; Canada)</option>
+                                                <option data-offset="-25200" value="Tijuana">(GMT-07:00) Tijuana</option>
+                                                <option data-offset="-25200" value="Arizona">(GMT-07:00) Arizona</option>
+                                                <option data-offset="-21600" value="Mountain Time (US &amp; Canada)">(GMT-06:00) Mountain Time (US &amp; Canada)</option>
+                                                <option data-offset="-21600" value="Chihuahua">(GMT-06:00) Chihuahua</option>
+                                                <option data-offset="-21600" value="Mazatlan">(GMT-06:00) Mazatlan</option>
+                                                <option data-offset="-21600" value="Saskatchewan">(GMT-06:00) Saskatchewan</option>
+                                                <option data-offset="-21600" value="Central America">(GMT-06:00) Central America</option>
+                                                <option data-offset="-18000" value="Central Time (US &amp; Canada)">(GMT-05:00) Central Time (US &amp; Canada)</option>
+                                                <option data-offset="-18000" value="Guadalajara">(GMT-05:00) Guadalajara</option>
+                                                <option data-offset="-18000" value="Mexico City">(GMT-05:00) Mexico City</option>
+                                                <option data-offset="-18000" value="Monterrey">(GMT-05:00) Monterrey</option>
+                                                <option data-offset="-18000" value="Bogota">(GMT-05:00) Bogota</option>
+                                                <option data-offset="-18000" value="Lima">(GMT-05:00) Lima</option>
+                                                <option data-offset="-18000" value="Quito">(GMT-05:00) Quito</option>
+                                                <option data-offset="-14400" value="Eastern Time (US &amp; Canada)">(GMT-04:00) Eastern Time (US &amp; Canada)</option>
+                                                <option data-offset="-14400" value="Indiana (East)">(GMT-04:00) Indiana (East)</option>
+                                                <option data-offset="-14400" value="Caracas">(GMT-04:00) Caracas</option>
+                                                <option data-offset="-14400" value="La Paz">(GMT-04:00) La Paz</option>
+                                                <option data-offset="-14400" value="Georgetown">(GMT-04:00) Georgetown</option>
+                                                <option data-offset="-10800" value="Atlantic Time (Canada)">(GMT-03:00) Atlantic Time (Canada)</option>
+                                                <option data-offset="-10800" value="Santiago">(GMT-03:00) Santiago</option>
+                                                <option data-offset="-10800" value="Brasilia">(GMT-03:00) Brasilia</option>
+                                                <option data-offset="-10800" value="Buenos Aires">(GMT-03:00) Buenos Aires</option>
+                                                <option data-offset="-9000" value="Newfoundland">(GMT-02:30) Newfoundland</option>
+                                                <option data-offset="-7200" value="Greenland">(GMT-02:00) Greenland</option>
+                                                <option data-offset="-7200" value="Mid-Atlantic">(GMT-02:00) Mid-Atlantic</option>
+                                                <option data-offset="-3600" value="Cape Verde Is.">(GMT-01:00) Cape Verde Is.</option>
+                                                <option data-offset="0" value="Azores">(GMT) Azores</option>
+                                                <option data-offset="0" value="Monrovia">(GMT) Monrovia</option>
+                                                <option data-offset="0" value="UTC">(GMT) UTC</option>
+                                                <option data-offset="3600" value="Dublin">(GMT+01:00) Dublin</option>
+                                                <option data-offset="3600" value="Edinburgh">(GMT+01:00) Edinburgh</option>
+                                                <option data-offset="3600" value="Lisbon">(GMT+01:00) Lisbon</option>
+                                                <option data-offset="3600" value="London">(GMT+01:00) London</option>
+                                                <option data-offset="3600" value="Casablanca">(GMT+01:00) Casablanca</option>
+                                                <option data-offset="3600" value="West Central Africa">(GMT+01:00) West Central Africa</option>
+                                                <option data-offset="7200" value="Belgrade">(GMT+02:00) Belgrade</option>
+                                                <option data-offset="7200" value="Bratislava">(GMT+02:00) Bratislava</option>
+                                                <option data-offset="7200" value="Budapest">(GMT+02:00) Budapest</option>
+                                                <option data-offset="7200" value="Ljubljana">(GMT+02:00) Ljubljana</option>
+                                                <option data-offset="7200" value="Prague">(GMT+02:00) Prague</option>
+                                                <option data-offset="7200" value="Sarajevo">(GMT+02:00) Sarajevo</option>
+                                                <option data-offset="7200" value="Skopje">(GMT+02:00) Skopje</option>
+                                                <option data-offset="7200" value="Warsaw">(GMT+02:00) Warsaw</option>
+                                                <option data-offset="7200" value="Zagreb">(GMT+02:00) Zagreb</option>
+                                                <option data-offset="7200" value="Brussels">(GMT+02:00) Brussels</option>
+                                                <option data-offset="7200" value="Copenhagen">(GMT+02:00) Copenhagen</option>
+                                                <option data-offset="7200" value="Madrid">(GMT+02:00) Madrid</option>
+                                                <option data-offset="7200" value="Paris">(GMT+02:00) Paris</option>
+                                                <option data-offset="7200" value="Amsterdam">(GMT+02:00) Amsterdam</option>
+                                                <option data-offset="7200" value="Berlin">(GMT+02:00) Berlin</option>
+                                                <option data-offset="7200" value="Bern">(GMT+02:00) Bern</option>
+                                                <option data-offset="7200" value="Rome">(GMT+02:00) Rome</option>
+                                                <option data-offset="7200" value="Stockholm">(GMT+02:00) Stockholm</option>
+                                                <option data-offset="7200" value="Vienna">(GMT+02:00) Vienna</option>
+                                                <option data-offset="7200" value="Cairo">(GMT+02:00) Cairo</option>
+                                                <option data-offset="7200" value="Harare">(GMT+02:00) Harare</option>
+                                                <option data-offset="7200" value="Pretoria">(GMT+02:00) Pretoria</option>
+                                                <option data-offset="10800" value="Bucharest">(GMT+03:00) Bucharest</option>
+                                                <option data-offset="10800" value="Helsinki">(GMT+03:00) Helsinki</option>
+                                                <option data-offset="10800" value="Kiev">(GMT+03:00) Kiev</option>
+                                                <option data-offset="10800" value="Kyiv">(GMT+03:00) Kyiv</option>
+                                                <option data-offset="10800" value="Riga">(GMT+03:00) Riga</option>
+                                                <option data-offset="10800" value="Sofia">(GMT+03:00) Sofia</option>
+                                                <option data-offset="10800" value="Tallinn">(GMT+03:00) Tallinn</option>
+                                                <option data-offset="10800" value="Vilnius">(GMT+03:00) Vilnius</option>
+                                                <option data-offset="10800" value="Athens">(GMT+03:00) Athens</option>
+                                                <option data-offset="10800" value="Istanbul">(GMT+03:00) Istanbul</option>
+                                                <option data-offset="10800" value="Minsk">(GMT+03:00) Minsk</option>
+                                                <option data-offset="10800" value="Jerusalem">(GMT+03:00) Jerusalem</option>
+                                                <option data-offset="10800" value="Moscow">(GMT+03:00) Moscow</option>
+                                                <option data-offset="10800" value="St. Petersburg">(GMT+03:00) St. Petersburg</option>
+                                                <option data-offset="10800" value="Volgograd">(GMT+03:00) Volgograd</option>
+                                                <option data-offset="10800" value="Kuwait">(GMT+03:00) Kuwait</option>
+                                                <option data-offset="10800" value="Riyadh">(GMT+03:00) Riyadh</option>
+                                                <option data-offset="10800" value="Nairobi">(GMT+03:00) Nairobi</option>
+                                                <option data-offset="10800" value="Baghdad">(GMT+03:00) Baghdad</option>
+                                                <option data-offset="14400" value="Abu Dhabi">(GMT+04:00) Abu Dhabi</option>
+                                                <option data-offset="14400" value="Muscat">(GMT+04:00) Muscat</option>
+                                                <option data-offset="14400" value="Baku">(GMT+04:00) Baku</option>
+                                                <option data-offset="14400" value="Tbilisi">(GMT+04:00) Tbilisi</option>
+                                                <option data-offset="14400" value="Yerevan">(GMT+04:00) Yerevan</option>
+                                                <option data-offset="16200" value="Tehran">(GMT+04:30) Tehran</option>
+                                                <option data-offset="16200" value="Kabul">(GMT+04:30) Kabul</option>
+                                                <option data-offset="18000" value="Ekaterinburg">(GMT+05:00) Ekaterinburg</option>
+                                                <option data-offset="18000" value="Islamabad">(GMT+05:00) Islamabad</option>
+                                                <option data-offset="18000" value="Karachi">(GMT+05:00) Karachi</option>
+                                                <option data-offset="18000" value="Tashkent">(GMT+05:00) Tashkent</option>
+                                                <option data-offset="19800" value="Chennai">(GMT+05:30) Chennai</option>
+                                                <option data-offset="19800" value="Kolkata">(GMT+05:30) Kolkata</option>
+                                                <option data-offset="19800" value="Mumbai">(GMT+05:30) Mumbai</option>
+                                                <option data-offset="19800" value="New Delhi">(GMT+05:30) New Delhi</option>
+                                                <option data-offset="19800" value="Sri Jayawardenepura">(GMT+05:30) Sri Jayawardenepura</option>
+                                                <option data-offset="20700" value="Kathmandu">(GMT+05:45) Kathmandu</option>
+                                                <option data-offset="21600" value="Astana">(GMT+06:00) Astana</option>
+                                                <option data-offset="21600" value="Dhaka">(GMT+06:00) Dhaka</option>
+                                                <option data-offset="21600" value="Almaty">(GMT+06:00) Almaty</option>
+                                                <option data-offset="21600" value="Urumqi">(GMT+06:00) Urumqi</option>
+                                                <option data-offset="23400" value="Rangoon">(GMT+06:30) Rangoon</option>
+                                                <option data-offset="25200" value="Novosibirsk">(GMT+07:00) Novosibirsk</option>
+                                                <option data-offset="25200" value="Bangkok">(GMT+07:00) Bangkok</option>
+                                                <option data-offset="25200" value="Hanoi">(GMT+07:00) Hanoi</option>
+                                                <option data-offset="25200" value="Jakarta">(GMT+07:00) Jakarta</option>
+                                                <option data-offset="25200" value="Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
+                                                <option data-offset="28800" value="Beijing">(GMT+08:00) Beijing</option>
+                                                <option data-offset="28800" value="Chongqing">(GMT+08:00) Chongqing</option>
+                                                <option data-offset="28800" value="Hong Kong">(GMT+08:00) Hong Kong</option>
+                                                <option data-offset="28800" value="Kuala Lumpur">(GMT+08:00) Kuala Lumpur</option>
+                                                <option data-offset="28800" value="Singapore">(GMT+08:00) Singapore</option>
+                                                <option data-offset="28800" value="Taipei">(GMT+08:00) Taipei</option>
+                                                <option data-offset="28800" value="Perth">(GMT+08:00) Perth</option>
+                                                <option data-offset="28800" value="Irkutsk">(GMT+08:00) Irkutsk</option>
+                                                <option data-offset="28800" value="Ulaan Bataar">(GMT+08:00) Ulaan Bataar</option>
+                                                <option data-offset="32400" value="Seoul">(GMT+09:00) Seoul</option>
+                                                <option data-offset="32400" value="Osaka">(GMT+09:00) Osaka</option>
+                                                <option data-offset="32400" value="Sapporo">(GMT+09:00) Sapporo</option>
+                                                <option data-offset="32400" value="Tokyo">(GMT+09:00) Tokyo</option>
+                                                <option data-offset="32400" value="Yakutsk">(GMT+09:00) Yakutsk</option>
+                                                <option data-offset="34200" value="Darwin">(GMT+09:30) Darwin</option>
+                                                <option data-offset="34200" value="Adelaide">(GMT+09:30) Adelaide</option>
+                                                <option data-offset="36000" value="Canberra">(GMT+10:00) Canberra</option>
+                                                <option data-offset="36000" value="Melbourne">(GMT+10:00) Melbourne</option>
+                                                <option data-offset="36000" value="Sydney">(GMT+10:00) Sydney</option>
+                                                <option data-offset="36000" value="Brisbane">(GMT+10:00) Brisbane</option>
+                                                <option data-offset="36000" value="Hobart">(GMT+10:00) Hobart</option>
+                                                <option data-offset="36000" value="Vladivostok">(GMT+10:00) Vladivostok</option>
+                                                <option data-offset="36000" value="Guam">(GMT+10:00) Guam</option>
+                                                <option data-offset="36000" value="Port Moresby">(GMT+10:00) Port Moresby</option>
+                                                <option data-offset="36000" value="Solomon Is.">(GMT+10:00) Solomon Is.</option>
+                                                <option data-offset="39600" value="Magadan">(GMT+11:00) Magadan</option>
+                                                <option data-offset="39600" value="New Caledonia">(GMT+11:00) New Caledonia</option>
+                                                <option data-offset="43200" value="Fiji">(GMT+12:00) Fiji</option>
+                                                <option data-offset="43200" value="Kamchatka">(GMT+12:00) Kamchatka</option>
+                                                <option data-offset="43200" value="Marshall Is.">(GMT+12:00) Marshall Is.</option>
+                                                <option data-offset="43200" value="Auckland">(GMT+12:00) Auckland</option>
+                                                <option data-offset="43200" value="Wellington">(GMT+12:00) Wellington</option>
+                                                <option data-offset="46800" value="Nuku'alofa">(GMT+13:00) Nuku'alofa</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
+
+                            <div class="kt-section kt-section--first">
+                                <div class="kt-section__body">
+                                    <div class="row">
+                                        <label class="col-xl-3"></label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <h3 class="kt-section__title kt-section__title-sm">Security:</h3>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Password reset verification</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="kt-checkbox-single">
+                                                <label class="kt-checkbox">
+                                                    <input type="checkbox"> Require personal information to reset your password.
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <span class="form-text text-muted">
+										For extra security, this requires you to confirm your email or phone number when you reset your password.
+										<a href="#" class="kt-link">Learn more</a>.
+									</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row kt-margin-t-10 kt-margin-b-10">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"></label>
+                                        <div class="col-lg-9 col-xl-6">
+
+                                            <button id="deact" type="button" class="btn btn-label-danger btn-bold btn-sm kt-margin-t-5 kt-margin-b-5">Deactivate your account ?</button>
                                         </div>
                                     </div>
                                 </div>
@@ -505,7 +750,7 @@
                                     <div class="col-lg-3 col-xl-3">
                                     </div>
                                     <div class="col-lg-9 col-xl-9">
-                                        <button type="reset" class="btn btn-brand btn-bold">Change Password</button>&nbsp;
+                                        <button id="update1" type="" class="btn btn-success">Submit</button>&nbsp;
                                         <button type="reset" class="btn btn-secondary">Cancel</button>
                                     </div>
                                 </div>
@@ -518,7 +763,7 @@
     </div>
     <!--End:: App Content-->
 </div>
-<!--End::App-->	</div>
+<!--End::App--> 	</div>
 	<!-- end:: Content -->
 </div>											</div>
 				</div>
@@ -543,12 +788,12 @@
 							<h3 class="kt-footer__title">Quick Links</h3>
 							<div class="kt-footer__content">
 								<div class="kt-footer__nav">
-									<div class="kt-footer__nav-section">
-                                            <a href="index.html">News feed</a>
-                                            <a href="publications.html">Publications</a>
-                                            <a href="https://www.thecophq.org">The Church of Pentecost</a>
-									</div>
-								
+                                        <div class="kt-footer__nav-section">
+                                                <a href="index.html">News feed</a>
+                                                <a href="publications.html">Publications</a>
+                                                <a href="https://www.thecophq.org">The Church of Pentecost</a>
+                                            </div>
+									 
 								</div>	
 							</div>
 						</div>
@@ -574,22 +819,21 @@
 		<div class="kt-footer__bottom">
 		<div class="kt-container">
 			<div class="kt-footer__wrapper">
-                    <div class="kt-footer__logo">
-                            <a href="index.html">
-                                <img alt="Logo" src="assets/media/logos/logo-2-sm.png">
-                            </a>		 			 
-                            <div class="kt-footer__copyright">
-                                2019&nbsp;&copy;&nbsp;  
-                                <a href="http://www.epawebsgh.com" target="_blank">Epaweb Solutions - Ghana</a>
-                            </div>
-                        </div>		
+				<div class="kt-footer__logo">
+					<a href="../../../../index.html">
+						<img alt="Logo" src="assets/media/logos/logo-2-sm.png">
+					</a>		 			 
+					<div class="kt-footer__copyright">
+						2019&nbsp;&copy;&nbsp;  
+						<a href="http://epawebsgh" target="_blank">Epaweb Solutions - Ghana</a>
+					</div>
+				</div>				 
 				<div class="kt-footer__menu">
-					<a href="http://epawebsgh.com/request" target="_blank">Request</a>
+                    <a href="http://epawebsgh.com/request" target="_blank">Request</a>
 					<a href="http://epawebsgh.com/about-us" target="_blank">About Us</a>
 					<a href="http://epawebsgh.com/" target="_blank">Epawebs Solutions</a>
 				</div>	
-            </div
-            >
+			</div>
 		</div>	
 	</div> 
 </div>
@@ -1014,10 +1258,26 @@
 </div>
 <!-- end::Quick Panel -->    
     <!-- begin::Scrolltop -->
-
+<div id="kt_scrolltop" class="kt-scrolltop">
+		<i class="fa fa-arrow-up"></i>
+</div>
 <!-- end::Scrolltop -->
     <!-- begin::Sticky Toolbar -->
+<ul class="kt-sticky-toolbar" style="margin-top: 30px;">
+	<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--success" id="kt_demo_panel_toggle" data-toggle="kt-tooltip"  title="Check out more demos" data-placement="right">
+		<a href="#" class=""><i class="flaticon2-drop"></i></a>
+	</li>
+	<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--brand" data-toggle="kt-tooltip" title="Layout Builder" data-placement="left">
+        		<a href="../../../../builder.html" ><i class="flaticon2-gear"></i></a>
+	</li>
+	<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--warning" data-toggle="kt-tooltip" title="Documentation" data-placement="left">
+		<a href="https://keenthemes.com/metronic/?page=docs" target="_blank"><i class="flaticon2-telegram-logo"></i></a>
+	</li>
 
+	<li class="kt-sticky-toolbar__item kt-sticky-toolbar__item--danger" id="kt_sticky_toolbar_chat_toggler" data-toggle="kt-tooltip" title="Chat Example" data-placement="left">
+		<a href="#" data-toggle="modal" data-target="#kt_chat_modal"><i class="flaticon2-chat-1"></i></a>
+	</li>
+</ul>
 <!-- end::Sticky Toolbar -->
 	<!-- begin::Demo Panel -->
 
@@ -1037,8 +1297,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo1.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo1/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo1/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo1/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo1/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item kt-demo-panel__item--active">
@@ -1048,8 +1308,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo2.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="../../../../rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="../../../../rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1059,8 +1319,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo3.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo3/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo3/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo3/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo3/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1070,8 +1330,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo4.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo4/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo4/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo4/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo4/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1081,8 +1341,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo5.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo5/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo5/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo5/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo5/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1092,8 +1352,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo6.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo6/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo6/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo6/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo6/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1103,8 +1363,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo7.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo7/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo7/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo7/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo7/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1114,8 +1374,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo8.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo8/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo8/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo8/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo8/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1125,8 +1385,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo9.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo9/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo9/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo9/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo9/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1136,8 +1396,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo10.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo10/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo10/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo10/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo10/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1147,8 +1407,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo11.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo11/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo11/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo11/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo11/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1158,8 +1418,8 @@
                     <div class="kt-demo-panel__item-preview">
                         <img src="assets/media/demos/preview/demo12.jpg" alt=""/>
                         <div class="kt-demo-panel__item-preview-overlay">
-                            <a href="https://keenthemes.com/metronic/preview/demo12/custom/apps/user/profile-1/change-password.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
-                            <a href="https://keenthemes.com/metronic/preview/demo12/rtl/custom/apps/user/profile-1/change-password.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo12/custom/apps/user/profile-1/account-information.html" class="btn btn-brand btn-elevate " target="_blank">Default</a>
+                            <a href="https://keenthemes.com/metronic/preview/demo12/rtl/custom/apps/user/profile-1/account-information.html" class="btn btn-light btn-elevate" target="_blank">RTL Version</a>
                         </div>
                     </div>                    
                 </div><div class="kt-demo-panel__item ">
@@ -1418,5 +1678,5 @@
             </body>
     <!-- end::Body -->
 
-<!-- Mirrored from keenthemes.com/metronic/preview/demo2/custom/apps/user/profile-1/change-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 May 2019 08:29:31 GMT -->
+<!-- Mirrored from keenthemes.com/metronic/preview/demo2/custom/apps/user/profile-1/account-information.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 May 2019 08:29:26 GMT -->
 </html>

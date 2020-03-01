@@ -1,7 +1,102 @@
 (function($) {
+
+
+
+// OBIRIS JS
+
+alert('ajdbajkbnjksdbabsjb')
+
+    $('#subform').click(function (e) {
+
+
+
+            e.preventDefault();
+
+            $.ajax({
+                 url:'route.php?func=SubmitForms',
+                 method:'post',
+                 dataType:'text',
+                 data:$(".kt-form").serialize(),
+                 beforeSend:function() {
+                   
+                 },
+                 success:function (data) {
+                       alert(data)
+                 }
+
+            })
+
+
+            
+
+
+
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*-------------------------------------
     Preloder Js here
     ---------------------------------------*/
+     
+
+
     //preloader
     $(window).load(function() {
         $(".preloader").delay(2000).fadeOut(500);
